@@ -24,3 +24,27 @@ pipeline {
         }
     }
 }
+post {
+        success {
+            slackSend (
+                channel: '#yourfirstname_ip1',
+                color: 'good',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) succeeded."
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#yourfirstname_ip1',
+                color: 'danger',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed."
+            )
+        }
+        always {
+            slackSend (
+                channel: '#yourfirstname_ip1',
+                color: 'warning',
+                message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) finished with status: ${currentBuild.currentResult}."
+            )
+        }
+    }
+}
