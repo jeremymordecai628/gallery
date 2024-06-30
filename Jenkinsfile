@@ -7,6 +7,16 @@ pipeline {
     }
 
     stages {
+        stage('Install Node.js and NPM') {
+            steps {
+                // Install the latest Node.js LTS and update NPM
+                sh '''
+                   curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+                   sudo apt-get install -y nodejs
+                   npm install -g npm@latest
+                '''
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
