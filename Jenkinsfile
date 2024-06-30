@@ -23,8 +23,7 @@ pipeline {
             }
         }
     }
-}
-post {
+    post {
         success {
             slackSend (
                 channel: '#yourfirstname_ip1',
